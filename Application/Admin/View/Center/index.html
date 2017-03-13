@@ -1,0 +1,105 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>用户列表</h2>
+	</div>
+	<div class="cf">
+		<div class="fl">
+			<a class="btn" href="{:U('Center/add')}">添 加</a>
+			<button class="btn ajax-post confirm" url="{:U('Center/changeStatus',array('method'=>'delete'))}" target-form="ids">删 除</button>
+		</div>
+
+		<!-- 高级搜索 -->
+		<div class="search-form fr cf">
+			<div class="sleft">
+				<input type="text" name="repair" class="search-input" value="{:I('repair')}" placeholder="请输入保修人名称或保修单号">
+				<a class="sch-btn" href="javascript:;" id="search" url="{:U('index')}"><i class="btn-search"></i></a>
+			</div>
+		</div>
+	</div>
+	<!-- 数据列表 -->
+	<div class="data-table table-striped">
+		<table class="">
+			<thead>
+			<tr>
+				<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+				<th class="">保修单号</th>
+				<th class="">报修人</th>
+				<th class="">电话</th>
+				<th class="">地址</th>
+				<th class="">问题</th>
+				<th class="">报修时间</th>
+				<th class="">状态</th>
+				<th class="">操作</th>
+			</tr>
+			</thead>
+			<tbody>
+			<notempty name="list">
+				<volist name="list" id="repair">
+					<tr>
+						<td><input class="ids" type="checkbox" name="" value="{$repair.id}" /></td>
+						<td>{$repair.id} </td>
+						<td>{$repair.name}</td>
+						<td>{$repair.tel}</td>
+						<td>{$repair.address}</td>
+						<td>{$repair.pro}</td>
+						<td><span>{$repair.time|time_format}</span></td>
+						<td>
+							<if condition="$repair.status == 0">未处理
+								<elseif condition="$repair.status == 1"/>处理中
+								<else />处理完成
+							</if>
+						</td>
+						<td><eq name="repair.status" value="0">
+							<button class="btn ajax-get confirm" url="{:U('Center/changeStatus?method=js&id='.$repair['id'])}" >接收处理</button>
+							<else/>
+							<eq name="repair.status" value="1">
+								<button class="btn ajax-get confirm" url="{:U('Center/changeStatus?method=wc&id='.$repair['id'])}" >处理完成</button>
+							</eq>
+						</eq>
+							<a href="{:U('Center/detail?id='.$repair['id'])}">查看详情</a>
+							<a href="{:U('Center/changeStatus?method=delete&id='.$repair['id'])}" class="confirm ajax-get">删除</a>
+						</td>
+					</tr>
+				</volist>
+				<else/>
+				<td colspan="9" class="text-center"> aOh! 暂时还没有内容! </td>
+			</notempty>
+			</tbody>
+		</table>
+	</div>
+	<!--<div class="page">-->
+		<!--{$_page}-->
+	<!--</div>-->
+</block>
+
+<block name="script">
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+	<script type="text/javascript">
+		//搜索功能
+		$("#search").click(function(){
+			var url = $(this).attr('url');
+			var query  = $('.search-form').find('input').serialize();
+			query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+			query = query.replace(/^&/g,'');
+			if( url.indexOf('?')>0 ){
+				url += '&' + query;
+			}else{
+				url += '?' + query;
+			}
+			window.location.href = url;
+		});
+		//回车搜索
+		$(".search-input").keyup(function(e){
+			if(e.keyCode === 13){
+				$("#search").click();
+				return false;
+			}
+		});
+		//导航高亮
+		highlight_subnav('{:U('Center/index')}');
+	</script>
+</block>
