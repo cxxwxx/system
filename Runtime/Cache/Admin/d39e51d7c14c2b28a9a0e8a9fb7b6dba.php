@@ -129,9 +129,7 @@
 						<td><?php echo ($repair["pro"]); ?></td>
 						<td><span><?php echo (time_format($repair["time"])); ?></span></td>
 						<td>
-							<?php if($repair["status"] == 0): ?>未处理
-								<?php elseif($repair["status"] == 1): ?>处理中
-								<?php else: ?>处理完成<?php endif; ?>
+							<?php echo (getstatus($repair["status"])); ?>
 						</td>
 						<td><?php if(($repair["status"]) == "0"): ?><button class="btn ajax-get confirm" url="<?php echo U('Center/changeStatus?method=js&id='.$repair['id']);?>" >接收处理</button>
 							<?php else: ?>
@@ -145,9 +143,9 @@
 			</tbody>
 		</table>
 	</div>
-	<!--<div class="page">-->
-		<!--<?php echo ($_page); ?>-->
-	<!--</div>-->
+	<div class="page">
+		<?php echo ($page); ?>
+	</div>
 
         </div>
         <div class="cont-ft">

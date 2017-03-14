@@ -371,3 +371,13 @@ function get_action_type($type, $all = false){
 	}
 	return $list[$type];
 }
+function getStatus($type)
+{
+    $status = [
+        0 => '未处理',
+        1 => '处理中',
+        2 => '已完成',
+        -1 => '删除'
+    ];
+    return $status[$type];
+}

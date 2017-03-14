@@ -47,10 +47,7 @@
 						<td>{$repair.pro}</td>
 						<td><span>{$repair.time|time_format}</span></td>
 						<td>
-							<if condition="$repair.status == 0">未处理
-								<elseif condition="$repair.status == 1"/>处理中
-								<else />处理完成
-							</if>
+							{$repair.status|getStatus}
 						</td>
 						<td><eq name="repair.status" value="0">
 							<button class="btn ajax-get confirm" url="{:U('Center/changeStatus?method=js&id='.$repair['id'])}" >接收处理</button>
@@ -70,9 +67,9 @@
 			</tbody>
 		</table>
 	</div>
-	<!--<div class="page">-->
-		<!--{$_page}-->
-	<!--</div>-->
+	<div class="page">
+		{$page}
+	</div>
 </block>
 
 <block name="script">

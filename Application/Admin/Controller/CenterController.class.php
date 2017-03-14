@@ -9,6 +9,8 @@
 namespace Admin\Controller;
 
 
+use Think\Page;
+
 class CenterController extends AdminController
 {
     public function action(){
@@ -25,11 +27,16 @@ class CenterController extends AdminController
 
     public function index()
     {
-        $map = array('status' => 0);
-        $list = M('Repair')->where($map)->select();
-//        dump($list);exit;
-//        int_to_string($list);
-        $this->assign('list', $list);
+        $count = M('Repair')->count();
+        //分页工具
+        $page = new Page($count,C('LIST_ROWS'));
+
+        $page_html = $page->show(); //分页工具条
+        $list = M('Repair')->page(I('p',1),$page->listRows)->select();
+        //分页工具条
+        //处理分页数据
+        $this->assign('list',$list);
+        $this->assign('page',$page_html);
         $this->meta_title = '物业管理';
         $this->display();
     }
