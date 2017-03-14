@@ -1,0 +1,19 @@
+<extend name="Base/common"/>
+<block name="content">
+    <div class="container-fluid">
+        <div class="row noticeList">
+            <Volist name="list" id="vo">
+            <a href="{:U('Service/detail?id='.$vo['id'])}">
+                <div class="col-xs-2">
+                    <img class="noticeImg" src="{$vo.cover_id|get_cover='path'}" />
+                </div>
+                <div class="col-xs-10">
+                    <p class="title">{$vo.title}</p>
+                    <p class="intro">{$vo.description}</p>
+                    <p class="info">浏览: {$vo.view} <span class="pull-right">{$vo.create_time|time_format}</span> </p>
+                </div>
+            </a>
+            </Volist>
+        </div>
+    </div>
+</block>
