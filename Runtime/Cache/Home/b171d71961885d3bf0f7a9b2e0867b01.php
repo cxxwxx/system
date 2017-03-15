@@ -25,9 +25,9 @@
     </style>
 </head>
 <body>
-<div class="main">
 
 
+    <div class="main">
     <!--导航部分-->
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container-fluid text-center">
@@ -41,7 +41,7 @@
                 <p class="navbar-text"><a href="faxian.html" class="navbar-link">发现</a></p>
             </div>
             <div class="col-xs-3">
-                <p class="navbar-text"><a href="<?php echo U('User/login');?>" class="navbar-link">我的</a></p>
+                <p class="navbar-text"><a href="<?php echo U('Center/index');?>" class="navbar-link">我的</a></p>
             </div>
         </div>
     </nav>
@@ -50,7 +50,7 @@
 
   <div class="container">
 
-    <form class="form-signin login-form" action="/User/login.html" method="post">
+    <form class="form-signin login-form" action="" method="post">
       <h2 class="form-signin-heading">登陆</h2>
       <p>
         <label for="inputUsername" class="sr-only">用户名</label>

@@ -50,19 +50,19 @@
 
     <div class="container-fluid" id="content">
         <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="row noticeList">
-            <a href="<?php echo U('Notice/detail?id='.$vo['id']);?>">
-            <div class="col-xs-2">
-                <img class="noticeImg" src="<?php echo (get_cover($vo["cover_id"],'path')); ?>" />
-            </div>
-            <div class="col-xs-10">
-                <p class="title"><?php echo ($vo["title"]); ?></p>
-                <p class="intro"><?php echo ($vo["description"]); ?></p>
-                <p class="info">浏览: <?php echo ($vo["view"]); ?> <span class="pull-right"><?php echo (time_format($vo["create_time"])); ?></span> </p>
-            </div>
+            <a href="<?php echo U('Activity/detail?id='.$vo['id']);?>">
+                <div class="col-xs-2">
+                    <img class="noticeImg" src="<?php echo (get_cover($vo["cover_id"],'path')); ?>" />
+                </div>
+                <div class="col-xs-10">
+                    <p class="title"><?php echo ($vo["title"]); ?></p>
+                    <p class="intro"><?php echo ($vo["description"]); ?></p>
+                    <p class="info">浏览: <?php echo ($vo["view"]); ?> <span class="pull-right"><?php echo (time_format($vo["create_time"])); ?></span> </p>
+                </div>
             </a>
         </div><?php endforeach; endif; else: echo "" ;endif; ?>
-        </div>
-    <div class="text-center"><button class="btn btn-info ajax-get-self">获取更多</button></div>
+    </div>
+    <div class="text-center"><button class="btn btn-info ajax-get">获取更多</button></div>
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -71,37 +71,34 @@
 <script src="/Public/Home/bootstrap/js/bootstrap.min.js"></script>
 
 
-    <script type="application/javascript">
-        var p = <?php echo I('p',1);?>;//定义一个p参数用I方法获取
-        $(function(){
-            $('.ajax-get-self').click(function(){
-
-                $.get("<?php echo U('Notice/index');?>",{'p':p+1},function(data){
-                    if(data.error==1){
-                        var list=data.data;
-                        console.log(list);
-//                        console.log(list);
-                        var html = '';
-                        $(list).each(function (i,e){
-                            html +='<div class="row noticeList">\
-                                <a href="'+e.url+'">\
-                                <div class="col-xs-2">\
-                                <img class="noticeImg" src="'+e.path+'" />\
-                                </div>\
-                                <div class="col-xs-10">\
-                                <p class="title">'+e.title+'</p>\
-                                <p class="intro">'+e.description+'</p>\
-                                <p class="info">浏览: '+e.view+' <span class="pull-right">'+e.add_time+'</span> </p>\
-                                </div>\
-                                </a>';
-                        } );
-                        p+=1;
-                        $('#content').append(html);
-                    }else{
-                        $('.ajax-get-self').html("没有跟多数据了！！").removeClass('ajax-get-self')
-                    }
-                })
-            })
+    <script>
+        var p = 1;
+        $(function () {
+           $('.ajax-get').click(function(){
+               $.get('<?php echo U(Service/index);?>',{'p':p+1},function(data){
+                   if(data){
+                       var html='';
+                       var list = data.data;
+                       $(list).each(function(i,e){
+                           html = '<a href="'+e.url+'">\
+                       <div class="col-xs-2">\
+                               <img class="noticeImg" src="'+e.path+'" />\
+                               </div>\
+                               <div class="col-xs-10">\
+                               <p class="title">'+e.title+'</p>\
+                       <p class="intro">'+e.description+'</p>\
+                       <p class="info">浏览: '+e.view+' <span class="pull-right">'+e.add_time+'</span> </p>\
+                       </div>\
+                       </a>\
+                       </div>';
+                       });
+                       $('#content').append(html);
+                       p = p+1;
+                   }else{
+                       $('.ajax-get').html('没有更多数据了！').removeClass('ajax-get');
+                   }
+               })
+           })
         });
     </script>
 

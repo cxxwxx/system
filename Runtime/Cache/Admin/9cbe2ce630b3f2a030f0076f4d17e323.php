@@ -392,7 +392,6 @@ $(function(){
         autoclose:true,
         pickerPosition:'bottom-left'
     })
-    
 })
 </script>
 

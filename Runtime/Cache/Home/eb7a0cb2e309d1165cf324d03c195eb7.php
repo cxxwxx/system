@@ -25,9 +25,9 @@
     </style>
 </head>
 <body>
-<div class="main">
 
 
+    <div class="main">
     <!--导航部分-->
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container-fluid text-center">
@@ -48,9 +48,9 @@
     <!--导航结束-->
 
 
-    <div class="container-fluid">
-        <div class="row noticeList">
-            <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><a href="<?php echo U('Service/detail?id='.$vo['id']);?>">
+    <div class="container-fluid" id="content">
+        <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="row noticeList">
+            <a href="<?php echo U('Service/detail?id='.$vo['id']);?>">
                 <div class="col-xs-2">
                     <img class="noticeImg" src="<?php echo (get_cover($vo["cover_id"],'path')); ?>" />
                 </div>
@@ -59,19 +59,48 @@
                     <p class="intro"><?php echo ($vo["description"]); ?></p>
                     <p class="info">浏览: <?php echo ($vo["view"]); ?> <span class="pull-right"><?php echo (time_format($vo["create_time"])); ?></span> </p>
                 </div>
-            </a><?php endforeach; endif; else: echo "" ;endif; ?>
-        </div>
+            </a>
+        </div><?php endforeach; endif; else: echo "" ;endif; ?>
     </div>
+    <div class="text-center"><button class="btn btn-info ajax-get">获取更多</button></div>
 
 
-</div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/Public/Home/js/jquery-1.11.2.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/Public/Home/bootstrap/js/bootstrap.min.js"></script>
 
 
-
+    <script>
+        var p = 1;
+        $(function () {
+           $('.ajax-get').click(function(){
+               $.get('<?php echo U(Service/index);?>',{'p':p+1},function(data){
+                   if(data){
+                       var html='';
+                       var list = data.data;
+                       $(list).each(function(i,e){
+                           html = '<a href="'+e.url+'">\
+                       <div class="col-xs-2">\
+                               <img class="noticeImg" src="'+e.path+'" />\
+                               </div>\
+                               <div class="col-xs-10">\
+                               <p class="title">'+e.title+'</p>\
+                       <p class="intro">'+e.description+'</p>\
+                       <p class="info">浏览: '+e.view+' <span class="pull-right">'+e.add_time+'</span> </p>\
+                       </div>\
+                       </a>\
+                       </div>';
+                       });
+                       $('#content').append(html);
+                       p = p+1;
+                   }else{
+                       $('.ajax-get').html('没有更多数据了！').removeClass('ajax-get');
+                   }
+               })
+           })
+        });
+    </script>
 
 </body>
 </html>

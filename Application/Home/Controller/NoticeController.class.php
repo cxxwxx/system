@@ -21,11 +21,12 @@ class NoticeController extends HomeController
         foreach ($list as &$value){
             $value['path'] = get_cover($value['cover_id'],'path');
             $value['add_time'] = time_format($value['create_time']);
+            $value['url'] = U('Notice/detail？id='.$value['id']);
         }
         //判断是否是ajax请求
         if(IS_AJAX){
             if(empty($list)){
-               $data['error'] = 0;
+                $data['error'] = 0;
             }else{
                 $data['error'] = 1;
                 $data['data']=$list;
@@ -37,8 +38,14 @@ class NoticeController extends HomeController
     }
     public function detail(){
         $id = I('get.id');
-//        dump($id);exit;
         $list = M('Document')->where(['id'=>$id])->find();
+        $list['view']+=1;
+        //保存
+        M('Document')->data(['view'=>$list['view']])->where(['id'=>$id])->save();
+
+
+//        dump($id);exit;
+
 //        dump($list);
         $document = M('Document_article')->where(['id'=>$id])->find();
 //        dump($document);exit;

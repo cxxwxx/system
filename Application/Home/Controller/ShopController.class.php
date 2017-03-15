@@ -2,27 +2,27 @@
 /**
  * Created by PhpStorm.
  * User: Administrator
- * Date: 2017/3/14
- * Time: 16:25
+ * Date: 2017/3/15
+ * Time: 11:25
  */
 
 namespace Home\Controller;
 
 
-class ServiceController extends HomeController
+class ShopController extends HomeController
 {
     public function index($p=1){
-        //->where(['category_id'=>41])
-        $service = M('Document');
-        $list = $service->page($p,1)->select();
-        foreach ($list as &$value){
+        //
+        $model = M('Document')->where(['category_id'=>42]);
+        $list = $model->page($p,1)->select();
+        foreach($list as &$value){
             $value['path'] = get_cover($value['cover_id'],'path');
             $value['add_time'] = time_format($value['create_time']);
-            $value['url'] = U('Service/detail?id='.$value['id']);
+            $value['url'] = U('Shop/detail?id='.$value['id']);
         }
         if(IS_AJAX){
             if($list){
-               $data['data'] = $list;
+                $data['data'] = $list;
             }
             $this->ajaxReturn($data);//返回ajax数据
         }

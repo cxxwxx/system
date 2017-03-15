@@ -25,14 +25,14 @@
     </style>
 </head>
 <body>
-<div class="main">
 
 
+    <div class="main">
     <!--导航部分-->
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container-fluid text-center">
             <div class="col-xs-3">
-                <p class="navbar-text"><a href="index.html" class="navbar-link">首页</a></p>
+                <p class="navbar-text"><a href="<?php echo U('Index/index');?>" class="navbar-link">首页</a></p>
             </div>
             <div class="col-xs-3">
                 <p class="navbar-text"><a href="fuwu.html" class="navbar-link">服务</a></p>
@@ -41,7 +41,7 @@
                 <p class="navbar-text"><a href="faxian.html" class="navbar-link">发现</a></p>
             </div>
             <div class="col-xs-3">
-                <p class="navbar-text"><a href="my.html" class="navbar-link">我的</a></p>
+                <p class="navbar-text"><a href="<?php echo U('User/login');?>" class="navbar-link">我的</a></p>
             </div>
         </div>
     </nav>
@@ -59,7 +59,6 @@
     </div>
 
 
-</div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/Public/Home/js/jquery-1.11.2.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->

@@ -25,9 +25,9 @@
     </style>
 </head>
 <body>
-<div class="main">
 </block>
 <block name="nav">
+    <div class="main">
     <!--导航部分-->
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container-fluid text-center">
@@ -41,7 +41,7 @@
                 <p class="navbar-text"><a href="faxian.html" class="navbar-link">发现</a></p>
             </div>
             <div class="col-xs-3">
-                <p class="navbar-text"><a href="{:U('User/login')}" class="navbar-link">我的</a></p>
+                <p class="navbar-text"><a href="{:U('Center/index')}" class="navbar-link">我的</a></p>
             </div>
         </div>
     </nav>
@@ -80,7 +80,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="notice.html">
+                        <a href="{:U('Shop/index')}">
                             <div class="indexLabel label-success">
                                 <span class="glyphicon glyphicon-briefcase"></span><br/>
                                 商家活动
@@ -96,7 +96,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="notice.html">
+                        <a href="{:U('Activity/index')}">
                             <div class="indexLabel label-default">
                                 <span class="glyphicon glyphicon-apple"></span><br/>
                                 小区活动

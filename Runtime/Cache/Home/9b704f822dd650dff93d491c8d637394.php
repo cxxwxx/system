@@ -25,9 +25,9 @@
     </style>
 </head>
 <body>
-<div class="main">
 
 
+    <div class="main">
     <!--导航部分-->
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container-fluid text-center">
@@ -50,7 +50,7 @@
 
 
   <div class="container-fluid">
-    <form class="login-form" action="/User/register.html" method="post">
+    <form class="login-form" action="<?php echo U('User/register');?>" method="post">
       <h2 class="form-signin-heading">用户注册</h2>
       <p>
         <label for="inputUsername" class="sr-only">用户名</label>

@@ -48,21 +48,36 @@
     <!--导航结束-->
 
 
-    <div class="container-fluid" id="content">
-        <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="row noticeList">
-            <a href="<?php echo U('Notice/detail?id='.$vo['id']);?>">
-            <div class="col-xs-2">
-                <img class="noticeImg" src="<?php echo (get_cover($vo["cover_id"],'path')); ?>" />
+    <div class="container">
+        <div class="blank"></div>
+        <div class="row">
+            <div class="col-xs-3">
+                <img src="/Public/Home/images/5.png" width="60" height="60" />
             </div>
-            <div class="col-xs-10">
-                <p class="title"><?php echo ($vo["title"]); ?></p>
-                <p class="intro"><?php echo ($vo["description"]); ?></p>
-                <p class="info">浏览: <?php echo ($vo["view"]); ?> <span class="pull-right"><?php echo (time_format($vo["create_time"])); ?></span> </p>
+            <div class="col-xs-9">
+                <?php echo ($user["nickname"]); ?><br/>
+                北大花园小区<br/>
+                积分:<span class="text-danger"><?php echo ($user["score"]); ?></span>
+                <span class="text-danger pull-right"><a class="ajax-get" href="">签到</a></span>
             </div>
-            </a>
-        </div><?php endforeach; endif; else: echo "" ;endif; ?>
         </div>
-    <div class="text-center"><button class="btn btn-info ajax-get-self">获取更多</button></div>
+        <div class="blank"></div>
+        <div class="row text-center myLabel">
+            <div class="col-xs-4 label-danger"><a href="#"><span class="iconfont">&#xe60b;</span>我的资料</a></div>
+            <div class="col-xs-4 label-success"><a href="#"><span class="iconfont">&#xe609;</span>我的报修</a></div>
+            <div class="col-xs-4 label-primary"><a href="#"><span class="iconfont">&#xe606;</span>报名的活动</a></div>
+        </div>
+        <div class="blank"></div>
+        <div>
+            <ul class="list-group fuwuList">
+                <li class="list-group-item"><a href="diaochawenjuan.html" class="text-danger"><span class="iconfont">&#xe60a;</span>我的缴费账单</a> </li>
+                <li class="list-group-item"><a href="yezhurenzheng.html" class="text-info"><span class="iconfont">&#xe608;</span>我的物业通知</a></li>
+                <li class="list-group-item"><a href="yezhurenzheng.html" class="text-info"><span class="iconfont">&#xe607;</span>我的水电气使用</a></li>
+                <li class="list-group-item"><a href="<?php echo U('User/logout');?>" class="text-info"><span class="iconfont">&#xe607;</span>退出登录</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -71,34 +86,14 @@
 <script src="/Public/Home/bootstrap/js/bootstrap.min.js"></script>
 
 
-    <script type="application/javascript">
-        var p = <?php echo I('p',1);?>;//定义一个p参数用I方法获取
+    <script>
         $(function(){
-            $('.ajax-get-self').click(function(){
-
-                $.get("<?php echo U('Notice/index');?>",{'p':p+1},function(data){
-                    if(data.error==1){
-                        var list=data.data;
-                        console.log(list);
-//                        console.log(list);
-                        var html = '';
-                        $(list).each(function (i,e){
-                            html +='<div class="row noticeList">\
-                                <a href="'+e.url+'">\
-                                <div class="col-xs-2">\
-                                <img class="noticeImg" src="'+e.path+'" />\
-                                </div>\
-                                <div class="col-xs-10">\
-                                <p class="title">'+e.title+'</p>\
-                                <p class="intro">'+e.description+'</p>\
-                                <p class="info">浏览: '+e.view+' <span class="pull-right">'+e.add_time+'</span> </p>\
-                                </div>\
-                                </a>';
-                        } );
-                        p+=1;
-                        $('#content').append(html);
+            $('.ajax-get').click(function(){
+                $.get("<?php echo U('Center/sign');?>",'',function(data){
+                    if(data.error==0){
+                        alert(data.msg);
                     }else{
-                        $('.ajax-get-self').html("没有跟多数据了！！").removeClass('ajax-get-self')
+                        alert(data.msg);
                     }
                 })
             })
