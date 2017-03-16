@@ -53,6 +53,7 @@
         <h3 class="noticeDetailTitle"><strong><?php echo ($list["title"]); ?></strong></h3>
         <div class="noticeDetailInfo">发布者:XXX小区物管</div>
         <div class="noticeDetailInfo">发布时间：<?php echo (time_format($list["create_time"])); ?></div>
+        <div class="noticeDetailInfo pull-right"><a class="ajax-get confirm" href="javascript:void(0)">申请参与活动</a></div>
         <div class="noticeDetailContent">
             <?php echo ($document["content"]); ?>
         </div>
@@ -65,7 +66,22 @@
 <script src="/Public/Home/bootstrap/js/bootstrap.min.js"></script>
 
 
-
+    <script>
+        var id = <?php echo I('id',$list['id']);?>;
+        $(function(){
+            $(".ajax-get").click(function(){
+                $.get("<?php echo U('Activity/apply');?>",{'id':id},function(data){
+                    if(data.error==1){
+                        console.log(data);
+                        alert(data.msg);
+                    }else{
+                        console.log(data);
+                        alert(data.msg);
+                    }
+                })
+            })
+        })
+    </script>
 
 </body>
 </html>

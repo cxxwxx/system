@@ -42,4 +42,26 @@ class ActivityController extends HomeController
         $this->assign('document',$document);
         $this->display();
     }
+
+    public function apply($id)
+    {
+        //判断是否登录
+        parent::login();
+        //查出当前用户SESSION中的数据
+        $model['uid'] = session('user_auth')['uid'];
+        $model['act_id'] = $id;
+        $apply = M('Apply')->where(['uid'=>$model['uid'],'act_id'=>$model['act_id']])->select();
+//        dump($apply);exit;
+        if($apply==null){
+            $activity = M('Apply');
+            $activity->add($model);
+            $data['error']=1;
+            $data['msg']='申请该活动成功！';
+        }else{
+            $data['error']=0;
+            $data['msg']='您已参与了该活动！';
+        }
+        $this->ajaxReturn($data);
+//        exit;
+    }
 }
