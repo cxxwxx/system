@@ -48,34 +48,36 @@
     <!--导航结束-->
 
 
-    <div class="container">
-        <div class="blank"></div>
-        <div class="row">
-            <div class="col-xs-3">
-                <img src="/Public/Home/images/5.png" width="60" height="60" />
+    <div class="container-fluid">
+        <form action="" method="post">
+            <div class="form-group">
+                <label>您的姓名(必填):</label>
+                <input type="text" class="form-control" name="name" />
             </div>
-            <div class="col-xs-9">
-                <?php echo ($user["nickname"]); ?><br/>
-                北大花园小区<br/>
-                积分:<span class="text-danger"><?php echo ($user["score"]); ?></span>
-                <span class="text-danger pull-right"><a class="ajax-get" href="">签到</a></span>
+            <div class="form-group">
+                <label>你的房号(必填):</label>
+                <input type="text" class="form-control" name="house" />
             </div>
-        </div>
-        <div class="blank"></div>
-        <div class="row text-center myLabel">
-            <div class="col-xs-4 label-danger"><a href="#"><span class="iconfont">&#xe60b;</span>我的资料</a></div>
-            <div class="col-xs-4 label-success"><a href="#"><span class="iconfont">&#xe609;</span>我的报修</a></div>
-            <div class="col-xs-4 label-primary"><a href="#"><span class="iconfont">&#xe606;</span>报名的活动</a></div>
-        </div>
-        <div class="blank"></div>
-        <div>
-            <ul class="list-group fuwuList">
-                <li class="list-group-item"><a href="diaochawenjuan.html" class="text-danger"><span class="iconfont">&#xe60a;</span>我的缴费账单</a> </li>
-                <li class="list-group-item"><a href="yezhurenzheng.html" class="text-info"><span class="iconfont">&#xe608;</span>我的物业通知</a></li>
-                <li class="list-group-item"><a href="yezhurenzheng.html" class="text-info"><span class="iconfont">&#xe607;</span>我的水电气使用</a></li>
-                <li class="list-group-item"><a href="<?php echo U('User/logout');?>" class="text-info"><span class="iconfont">&#xe607;</span>退出登录</a></li>
-            </ul>
-        </div>
+            <div class="form-group">
+                <label>您与业主的关系(必填):</label>
+                <select class="form-control" name="relation">
+                    <option value="1">本人</option>
+                    <option value="2">亲属</option>
+                    <option value="3">租户</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>联系电话(必填):</label>
+                <input type="text" class="form-control" name="phone" />
+            </div>
+            <div class="form-group">
+                <label>身份证号码(必填):</label>
+                <input type="text" class="form-control" name="IDcard"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary onlineBtn">确认提交</button>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -86,19 +88,7 @@
 <script src="/Public/Home/bootstrap/js/bootstrap.min.js"></script>
 
 
-    <script>
-        $(function(){
-            $('.ajax-get').click(function(){
-                $.get("<?php echo U('Center/sign');?>",'',function(data){
-                    if(data.error==0){
-                        alert(data.msg);
-                    }else{
-                        alert(data.msg);
-                    }
-                })
-            })
-        });
-    </script>
+
 
 </body>
 </html>

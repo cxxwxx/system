@@ -48,32 +48,18 @@
     <!--导航结束-->
 
 
-    <div class="container">
-        <div class="blank"></div>
-        <div class="row">
-            <div class="col-xs-3">
-                <img src="/Public/Home/images/5.png" width="60" height="60" />
-            </div>
-            <div class="col-xs-9">
-                <?php echo ($user["nickname"]); ?><br/>
-                北大花园小区<br/>
-                积分:<span class="text-danger"><?php echo ($user["score"]); ?></span>
-                <span class="text-danger pull-right"><a class="ajax-get" href="">签到</a></span>
-            </div>
+    <div class="container-fluid">
+        <div class="indexImg row">
+            <img src="/Public/Home/images/3.png" width="100%" />
         </div>
         <div class="blank"></div>
-        <div class="row text-center myLabel">
-            <div class="col-xs-4 label-danger"><a href="#"><span class="iconfont">&#xe60b;</span>我的资料</a></div>
-            <div class="col-xs-4 label-success"><a href="#"><span class="iconfont">&#xe609;</span>我的报修</a></div>
-            <div class="col-xs-4 label-primary"><a href="#"><span class="iconfont">&#xe606;</span>报名的活动</a></div>
-        </div>
-        <div class="blank"></div>
-        <div>
+        <div class="container">
             <ul class="list-group fuwuList">
-                <li class="list-group-item"><a href="diaochawenjuan.html" class="text-danger"><span class="iconfont">&#xe60a;</span>我的缴费账单</a> </li>
-                <li class="list-group-item"><a href="yezhurenzheng.html" class="text-info"><span class="iconfont">&#xe608;</span>我的物业通知</a></li>
-                <li class="list-group-item"><a href="yezhurenzheng.html" class="text-info"><span class="iconfont">&#xe607;</span>我的水电气使用</a></li>
-                <li class="list-group-item"><a href="<?php echo U('User/logout');?>" class="text-info"><span class="iconfont">&#xe607;</span>退出登录</a></li>
+                <li class="list-group-item"><a href="diaochawenjuan.html" class="text-danger"><span class="iconfont">&#xe604;</span>调查问卷</a> </li>
+                <li class="list-group-item"><a href="<?php echo U('Owner/register');?>" class="text-info"><span class="iconfont">&#xe605;</span>业主认证</a></li>
+                <li class="list-group-item"><a href="#" class="text-success"><span class="iconfont">&#xe602;</span>在线缴费</a></li>
+                <li class="list-group-item"><a href="notice.html" class="text-warning"><span class="iconfont">&#xe601;</span>生活贴士</a></li>
+                <li class="list-group-item"><a href="about.html" class="text-primary"><span class="iconfont">&#xe600;</span>关于我们</a></li>
             </ul>
         </div>
     </div>
@@ -86,19 +72,7 @@
 <script src="/Public/Home/bootstrap/js/bootstrap.min.js"></script>
 
 
-    <script>
-        $(function(){
-            $('.ajax-get').click(function(){
-                $.get("<?php echo U('Center/sign');?>",'',function(data){
-                    if(data.error==0){
-                        alert(data.msg);
-                    }else{
-                        alert(data.msg);
-                    }
-                })
-            })
-        });
-    </script>
+
 
 </body>
 </html>

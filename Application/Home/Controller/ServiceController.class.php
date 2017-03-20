@@ -42,5 +42,8 @@ class ServiceController extends HomeController
         $this->assign('document',$document);
         $this->display();
     }
+    public function list1(){
+        $this->display();
+    }
 
 }

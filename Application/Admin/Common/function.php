@@ -381,3 +381,11 @@ function getStatus($type)
     ];
     return $status[$type];
 }
+function getRelation($type){
+    $relation = [
+        1=>'本人',
+        2=>'亲属',
+        3=>'租户',
+    ];
+    return $relation[$type];
+}

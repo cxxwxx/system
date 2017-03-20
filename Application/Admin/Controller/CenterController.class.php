@@ -104,4 +104,23 @@ class CenterController extends AdminController
         $this->meta_title = '物业详情';
         $this->display();
     }
+    public function activity(){
+        $data=M("Apply");
+        $user=M('Member');
+        $activity=M('Document');
+        $list=$data->select();
+        //添加用户名
+        foreach ($list as &$item){
+            $aa=$user->where(['uid'=>$item['member_id']])->find();
+            $item['nickname']=$aa['nickname'];
+            $act_info=$activity->where(['id'=>$item['act_id']])->find();
+            $item['act_name']=$act_info['title'];
+            $item['act_des']=$act_info['description'];
+            $item['act_endtime']=date('Y-m-d',$act_info['deadline']);
+            $item['act_status']=$act_info['status'];
+        }
+        $this->assign('activity',$list);
+       $this->display();
+
+    }
 }

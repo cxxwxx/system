@@ -32,7 +32,7 @@ class CenterController extends HomeController
         $model = M('Member')->where(['uid'=>$member_id])->find();
         if(date('Y-m-d',$model['last_sign_time']) < date('Y-m-d')){
             //签到
-            $model['score'] +=20;
+            $model['score'] +=rand(1,20);
             $model['last_sign_time'] = time();
             M('Member')->data(['score'=>$model['score'],'last_sign_time'=>$model['last_sign_time']])->where(['uid'=>$member_id])->save();
             $data['error'] = 0;
